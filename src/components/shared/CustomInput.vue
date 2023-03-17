@@ -19,10 +19,11 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/variables.scss';
 
-/* .wrapper-input {
-  position: relative;
-  display: inline-flex;
-} */
+.wrapper-input {
+    position: relative;
+    display: inline-flex;
+}
+
 .custom-input {
     height: 40px;
     width: 100%;
@@ -32,15 +33,15 @@ export default {
     line-height: inherit;
     padding: 8px 15px;
 
-    /* &::placeholder {
+    &::placeholder {
         color: inherit;
-    } */
+    }
 
-    /* &--error {
+    &--error {
         border-color: red;
-    } */
+    }
 
-    /* &__error {
+    &__error {
         position: absolute;
         top: 100%;
         right: 0;
@@ -48,6 +49,6 @@ export default {
         font-size: 12px;
         color: red;
         line-height: 1.3;
-    } */
+    }
 }
 </style>
