@@ -1,12 +1,12 @@
 <template>
-  <div :id="$style.app">
+  <div id="app">
     <h2>{{ text }}</h2>
     <!-- <input type="text" v-model="text" > -->
     <!-- <input type="text" :value="text" @input="event => text = event.target.value"> -->
-    <CustomSelect :items="['name', 'label', 'salary']"></CustomSelect>
-    <CustomInput v-model="text"></CustomInput>
+    <Container>
+      <ApartmentFilterForm class="apartments-filter" @submit="logger"></ApartmentFilterForm>
+    </Container>
     <ApartmentsList v-bind:items="apartments">
-      <template v-slot:title></template>
       <template v-slot:apartment="{ apartment }">
         <ApartmentsItem v-bind:key="apartment.id" :descr="apartment.descr" :rating="apartment.rating"
           :imgSrc="apartment.imgUrl" :price="apartment.price" @click.native="handleItemClick">
@@ -20,16 +20,16 @@
 import ApartmentsList from './components/apartments/ApartmentsList.vue';
 import ApartmentsItem from './components/apartments/ApartmentsItem.vue';
 import apartments from './components/apartments/apartments';
-import CustomInput from './components/shared/CustomInput.vue';
-import CustomSelect from './components/shared/CustomSelect.vue';
+import ApartmentFilterForm from './components/apartments/ApartmentFilterForm.vue';
+import Container from './components/shared/Container.vue';
 
 export default {
   name: 'App',
   components: {
     ApartmentsList,
     ApartmentsItem,
-    CustomInput,
-    CustomSelect
+    ApartmentFilterForm,
+    Container
   },
   data() {
     return {
@@ -43,20 +43,28 @@ export default {
   //   }
   // },
   methods: {
-    handleItemClick() {
-      console.log('item click')
+    logger(value) {
+      console.log(value, '---form value')
     }
   }
 }
 </script>
 
-<style module>
+<style lang="scss" scoped>
 #app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: Montserrat, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.apartments-filter {
+  margin-bottom: 40px;
 }
 </style>
