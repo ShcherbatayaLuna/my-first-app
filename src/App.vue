@@ -1,19 +1,25 @@
 <template>
   <div id="app">
-    <h2>{{ text }}</h2>
-    <!-- <input type="text" v-model="text" > -->
-    <!-- <input type="text" :value="text" @input="event => text = event.target.value"> -->
-    <Container>
-      <ApartmentFilterForm class="apartments-filter" @submit="filter"></ApartmentFilterForm>
-    </Container>
-    <p v-if="!filteredApartments.length">Ничего не найдено</p>
-    <ApartmentsList v-else v-bind:items="filteredApartments">
-      <template v-slot:apartment="{ apartment }">
-        <ApartmentsItem v-bind:key="apartment.id" :descr="apartment.descr" :rating="apartment.rating"
-          :imgSrc="apartment.imgUrl" :price="apartment.price" @click.native="handleItemClick">
-        </ApartmentsItem>
-      </template>
-    </ApartmentsList>
+    <Header />
+    <div class="content">
+      <h2>{{ text }}</h2>
+      <!-- <input type="text" v-model="text" > -->
+      <!-- <input type="text" :value="text" @input="event => text = event.target.value"> -->
+      <Container>
+        <ApartmentFilterForm class="apartments-filter" @submit="filter"></ApartmentFilterForm>
+      </Container>
+      <Container>
+        <p v-if="!filteredApartments.length">Ничего не найдено</p>
+        <ApartmentsList v-else v-bind:items="filteredApartments">
+          <template v-slot:apartment="{ apartment }">
+            <ApartmentsItem v-bind:key="apartment.id" :descr="apartment.descr" :rating="apartment.rating"
+              :imgSrc="apartment.imgUrl" :price="apartment.price" @click.native="handleItemClick">
+            </ApartmentsItem>
+          </template>
+        </ApartmentsList>
+      </Container>
+    </div>
+    <Footer />
   </div>
 </template>
 
@@ -23,6 +29,8 @@ import ApartmentsItem from './components/apartments/ApartmentsItem.vue';
 import apartments from './components/apartments/apartments';
 import ApartmentFilterForm from './components/apartments/ApartmentFilterForm.vue';
 import Container from './components/shared/Container.vue';
+import Footer from './components/Footer.vue';
+import Header from './components/Header.vue';
 
 export default {
   name: 'App',
@@ -30,7 +38,9 @@ export default {
     ApartmentsList,
     ApartmentsItem,
     ApartmentFilterForm,
-    Container
+    Container,
+    Footer,
+    Header
   },
   data() {
     return {
@@ -80,6 +90,7 @@ export default {
 
 .content {
   flex-grow: 1;
+  padding-top: 120px;
 }
 
 .apartments-filter {
