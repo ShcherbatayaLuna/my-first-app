@@ -17,10 +17,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/scss/variables.scss';
+
+/* .wrapper-input {
+  position: relative;
+  display: inline-flex;
+} */
 .custom-input {
     height: 40px;
     width: 100%;
-    border: 2px solid orange;
+    border: 2px solid $main-color;
     font-size: 18px;
     outline: none;
     line-height: inherit;
