@@ -8,8 +8,11 @@
                     <StarRating :rating="rating" />
                 </div>
                 <div class="apartments-item__price">UAH {{ price }}</div>
-                <a href="https://facebook.com" @click.prevent.stop="handleLinkClick">facebook</a>
+                <router-link class="apartments-item__link"
+                    :to="{ name: 'apartment', params: { id }, query: { name: 'John' } }">Click
+                    me</router-link>
             </div>
+
         </div>
     </div>
 </template>
@@ -23,6 +26,10 @@ export default {
         StarRating
     },
     props: {
+        id: {
+            type: String,
+            required: true
+        },
         decsr: {
             type: String,
             default: ''
