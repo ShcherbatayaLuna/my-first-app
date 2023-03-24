@@ -3,7 +3,10 @@
         <Container>
             <div class="apartment-page__content">
                 <ApartmentsMainInfo :apartment="apartment" />
-                <ApartmentOwner class="apartment-page__owner" :owner="apartment.owner" />
+                <div class="apartment-page__additional-info">
+                    <ApartmentOwner :owner="apartment.owner" />
+                    <Reviews :reviews="reviewsList" />
+                </div>
             </div>
         </Container>
     </main>
@@ -14,21 +17,27 @@ import Container from '../components/shared/Container.vue';
 import apartments from '../components/apartments/apartments';
 import ApartmentsMainInfo from '../components/apartments/ApartmentsMainInfo.vue';
 import ApartmentOwner from '../components/apartments/ApartmentOwner.vue';
+import Reviews from '../components/reviews'
+import reviewsList from '../components/reviews/reviews.json'
 
 export default {
     name: 'ApartmentPage',
     components: {
         Container,
         ApartmentsMainInfo,
-        ApartmentOwner
+        ApartmentOwner,
+        Reviews
     },
     computed: {
+        reviewsList() {
+            return reviewsList
+        },
         apartment() {
             return apartments.find(apartment => apartment.id === this.$route.params.id)
         }
     },
     mounted() {
-        console.log(this.apartment)
+        // console.log(this.apartment)
     }
 }
 </script>
@@ -47,11 +56,6 @@ export default {
         max-width: 350px;
         flex-grow: 0;
         flex-shrink: 1;
-    }
-
-    &__owner {
-        max-width: 350px;
-        margin-left: 30px;
     }
 }
 </style>
