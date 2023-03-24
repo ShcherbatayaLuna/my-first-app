@@ -1,10 +1,10 @@
 <template>
     <main class="homepage">
         <Container>
-            <ApartmentFilterForm class="apartments-filter" @submit="filter"></ApartmentFilterForm>
+            <ApartmentFilterForm class="apartments__filter" @submit="filter"></ApartmentFilterForm>
         </Container>
         <Container>
-            <p v-if="!filteredApartments.length">Ничего не найдено</p>
+            <p v-if="!filteredApartments.length" class="apartments__not-found">Ничего не найдено</p>
             <ApartmentsList v-else v-bind:items="filteredApartments">
                 <template v-slot:apartment="{ apartment }">
                     <ApartmentsItem v-bind:key="apartment.id" :id='apartment.id' :descr="apartment.descr"
@@ -19,9 +19,10 @@
 <script>
 import ApartmentsList from '../components/apartments/ApartmentsList.vue';
 import ApartmentsItem from '../components/apartments/ApartmentsItem.vue';
-import apartments from '../components/apartments/apartments';
+// import apartments from '../components/apartments/apartments';
 import ApartmentFilterForm from '../components/apartments/ApartmentFilterForm.vue';
 import Container from '../components/shared/Container.vue';
+import { getApartmentsList } from '@/services/apartments.service';
 
 export default {
     name: 'App',
@@ -33,7 +34,7 @@ export default {
     },
     data() {
         return {
-            apartments,
+            apartments: '',
             text: '',
             filters: {
                 city: '',
@@ -44,6 +45,15 @@ export default {
     computed: {
         filteredApartments() {
             return this.filterByCityName(this.filterByPrice(this.apartments))
+        }
+    },
+    async created() {
+        try {
+            const { data } = await getApartmentsList();
+            // console.log(data)
+            this.apartments = data;
+        } catch (error) {
+            console.error(error)
         }
     },
     methods: {
@@ -68,22 +78,15 @@ export default {
 </script>
   
 <style lang="scss" scoped>
-/* #app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    font-family: Montserrat, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
+.apartments {
+    &__filter {
+        margin-bottom: 40px;
+    }
 
-.content {
-    flex-grow: 1;
-    padding-top: 120px;
-} */
-
-.apartments-filter {
-    margin-bottom: 40px;
+    &__not-found {
+        font-size: 40px;
+        text-align: center;
+    }
 }
 </style>
   
