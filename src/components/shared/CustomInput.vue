@@ -1,6 +1,7 @@
 <template>
     <div class="wrapper-input">
-        <input v-on="listeners" v-bind="$attrs" class="custom-input" :class="!isValid && 'custom-input--error'">
+        <input v-on="listeners" v-bind="$attrs" :value="value" class="custom-input"
+            :class="!isValid && 'custom-input--error'">
         <span v-if="!isValid" class="custom-input__error">{{ error }}</span>
     </div>
 </template>
@@ -12,6 +13,11 @@ export default {
         return {
             isValid: true,
             error: ''
+        }
+    },
+    inject: {
+        form: {
+            default: null,
         }
     },
     inheritAttrs: false,
@@ -38,22 +44,33 @@ export default {
         }
     },
     watch: {
-        value(value) {
-            this.validate(value)
-            console.log(value)
+        value() {
+            this.validate()
         }
     },
+    mounted() {
+        if (!this.form) return;
+        this.form.registerInput(this);
+    },
+    beforeDestroy() {
+        if (!this.form) return;
+        this.form.unRegisterInput(this);
+    },
     methods: {
-        validate(value) {
+        validate() {
             this.isValid = this.rules.every(rule => {
-                const { hasPassed, message } = rule(value)
+                const { hasPassed, message } = rule(this.value)
 
                 if (!hasPassed) {
                     this.error = message || this.errorMessage
                 }
                 return hasPassed
             })
-
+            return this.isValid;
+        },
+        reset() {
+            this.isValid = true;
+            this.$emit('input', '')
         }
     }
 }
