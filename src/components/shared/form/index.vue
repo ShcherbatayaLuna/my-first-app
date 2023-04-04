@@ -28,8 +28,6 @@ export default {
         validate() {
             return this.inputs.reduce((isValid, input) => {
                 const isInputValid = input.validate()
-                console.log(isValid, 'acc')
-                console.log(isInputValid, 'input')
                 return isValid && isInputValid
             }, true)
         },
