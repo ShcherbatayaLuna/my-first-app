@@ -5,7 +5,7 @@
             <CustomInput type="number" v-model="price" placeholder="Цена, от" class="form__input"
                 error-message="Не должно быть пустым" :rules='rules'></CustomInput>
         </div>
-        <Button type="submit">Подбор жилья</Button>
+        <Button class="form__submit" type="submit">Подбор жилья</Button>
     </form>
 </template>
 
@@ -33,12 +33,25 @@ export default {
             return [isRequired, charLimit(10)]
         },
         cities() {
-            return [{ value: '', label: 'Город', selected: true }, 'Kyiv', 'Odesa', 'Poltava', 'Kharkiv', 'Dnipro', 'Lviv', 'Kherson', 'Mariupol']
+            return [
+                { value: '', label: 'Город', selected: true },
+                'Kyiv',
+                'Odesa',
+                'Poltava',
+                'Kharkiv',
+                'Dnipro',
+                'Lviv',
+                'Kherson',
+                'Mariupol'
+            ]
         }
     },
     methods: {
         handleSubmit() {
-            this.$emit('submit', { city: this.city, price: this.price })
+            this.$emit('submit', {
+                city: this.city,
+                price: this.price
+            })
         }
     }
 }
