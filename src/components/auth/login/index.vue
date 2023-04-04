@@ -2,10 +2,10 @@
     <AuthContainer>
         <MainTitle class="login__title">Логин</MainTitle>
         <Form ref="form" class="login__form" @submit.prevent="handleSubmit">
-            <CustomInput v-model="formData.email" name="email" placeholder="Email" :rules="emailRules"
+            <CustomInput v-model="formData.email" name="email" placeholder="Email" autocomplete="email" :rules="emailRules"
                 class="login__input" />
-            <CustomInput v-model="formData.password" name="password" placeholder="Password" type="password"
-                :rules="passwordRules" class="login__input" />
+            <CustomInput v-model="formData.password" name="password" placeholder="Password" autocomplete="current password"
+                type="password" :rules="passwordRules" class="login__input" />
             <Button type="submit" class="login__btn">Вход</Button>
         </Form>
     </AuthContainer>
