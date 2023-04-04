@@ -6,7 +6,7 @@
                 class="login__input" />
             <CustomInput v-model="formData.password" name="password" placeholder="Password" autocomplete="current password"
                 type="password" :rules="passwordRules" class="login__input" />
-            <Button type="submit" class="login__btn">Вход</Button>
+            <Button type="submit" :loading="loading" class="login__btn">Вход</Button>
         </Form>
     </AuthContainer>
 </template>
@@ -31,6 +31,7 @@ export default {
     },
     data() {
         return {
+            loading: false,
             formData: {
                 email: '',
                 password: ''
@@ -58,10 +59,13 @@ export default {
 
             if (isFormValid) {
                 try {
+                    this.loading = true;
                     const { data } = await loginUser(this.formData)
                     console.log(data)
                 } catch (error) {
                     console.error(error)
+                } finally {
+                    this.loading = false;
                 }
 
             }
