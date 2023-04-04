@@ -1,18 +1,20 @@
 <template>
     <main class="homepage">
-        <Container>
-            <ApartmentFilterForm class="apartments__filter" @submit="filter"></ApartmentFilterForm>
-        </Container>
-        <Container>
-            <p v-if="!filteredApartments.length" class="apartments__not-found">Ничего не найдено</p>
-            <ApartmentsList v-else v-bind:items="filteredApartments">
-                <template v-slot:apartment="{ apartment }">
-                    <ApartmentsItem v-bind:key="apartment.id" :id='apartment.id' :descr="apartment.descr"
-                        :rating="apartment.rating" :imgSrc="apartment.imgUrl" :price="apartment.price">
-                    </ApartmentsItem>
-                </template>
-            </ApartmentsList>
-        </Container>
+        <SectionWithHeaderSpacer>
+            <Container>
+                <ApartmentFilterForm class="apartments__filter" @submit="filter"></ApartmentFilterForm>
+            </Container>
+            <Container>
+                <p v-if="!filteredApartments.length" class="apartments__not-found">Ничего не найдено</p>
+                <ApartmentsList v-else v-bind:items="filteredApartments">
+                    <template v-slot:apartment="{ apartment }">
+                        <ApartmentsItem v-bind:key="apartment.id" :id='apartment.id' :descr="apartment.descr"
+                            :rating="apartment.rating" :imgSrc="apartment.imgUrl" :price="apartment.price">
+                        </ApartmentsItem>
+                    </template>
+                </ApartmentsList>
+            </Container>
+        </SectionWithHeaderSpacer>
     </main>
 </template>
   
@@ -23,6 +25,7 @@ import ApartmentsItem from '../components/apartments/ApartmentsItem.vue';
 import ApartmentFilterForm from '../components/apartments/ApartmentFilterForm.vue';
 import Container from '../components/shared/Container.vue';
 import { getApartmentsList } from '@/services/apartments.service';
+import SectionWithHeaderSpacer from '@/components/shared/SectionWithHeaderSpacer.vue';
 
 export default {
     name: 'App',
@@ -30,7 +33,8 @@ export default {
         ApartmentsList,
         ApartmentsItem,
         ApartmentFilterForm,
-        Container
+        Container,
+        SectionWithHeaderSpacer
     },
     data() {
         return {
