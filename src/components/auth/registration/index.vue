@@ -81,7 +81,11 @@ export default {
                     console.log(data);
                     form.reset();
                 } catch (error) {
-                    console.error(error);
+                    this.$notify({
+                        type: 'error',
+                        title: 'Произошла ошибка',
+                        text: error.message
+                    })
                 } finally {
                     this.loading = false;
                 }
