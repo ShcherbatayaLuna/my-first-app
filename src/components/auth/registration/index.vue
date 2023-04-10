@@ -22,6 +22,7 @@ import Button from '../../shared/Button.vue';
 import AuthContainer from '../AuthContainer.vue';
 import MainTitle from '@/components/shared/MainTitle.vue';
 import { emailValidation, passwordValidation, isRequired } from '@/utils/validationRules';
+import { mapActions } from 'vuex';
 
 export default {
     name: 'RegistrationForm',
@@ -68,6 +69,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions('auth', ['registration']),
         async handleSubmit() {
             const { form } = this.$refs
             const isFormValid = form.validate()
@@ -76,7 +78,7 @@ export default {
                 try {
                     this.loading = true;
 
-                    await this.$store.dispatch('registration', this.formData);
+                    await this.registration(this.formData);
 
                     this.$router.push({ name: 'homepage' })
                     form.reset();
