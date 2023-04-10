@@ -11,9 +11,8 @@
 
 <script>
 import Footer from './components/Footer.vue';
-import Header from './components/Header.vue';
+import Header from './components/header';
 import Notification from './components/notifications';
-import { mapGetters } from 'vuex';
 
 export default {
   name: 'App',
@@ -22,12 +21,6 @@ export default {
     Footer,
     Notification,
   },
-  computed: {
-    ...mapGetters('auth', ['isLoggedIn'])
-  },
-  mounted() {
-    console.log(this.isLoggedIn);
-  }
 }
 </script>
 
