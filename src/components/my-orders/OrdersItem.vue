@@ -1,15 +1,13 @@
 <template>
     <div class="orders-item">
-        <img class="orders-item__photo" :src="order.imgUrl" alt="Фото апартаментов">
+        <img class="orders-item__photo" :src="imgUrl" alt="Фото апартаментов">
         <div class="orders-item__details">
             <div class="orders-item__text">
-                <h2 class="orders-item__title">
-                    {{ order.title }}
-                </h2>
-                <p class="orders-item__location">{{ order.location.city }}</p>
-                <div class="orders-item__cost">
-                    <span class="orders-item__price">UAH {{ order.price }}</span> за ночь
-                </div>
+                <h2 class="orders-item__title">{{ title }}</h2>
+                <p class="orders-item__location">{{ location.city }}</p>
+            </div>
+            <div class="orders-item__cost">
+                <span class="orders-item__price">UAH {{ price }}</span> за ночь
             </div>
         </div>
     </div>
@@ -19,12 +17,26 @@
 export default {
     name: 'OrdersItem',
     props: {
-        order: {
+        // order: {
+        //     type: Object,
+        //     required: true
+        // }
+        title: {
+            type: String,
+            default: ''
+        },
+        imgUrl: {
+            type: String,
+            default: ''
+        },
+        price: {
+            type: Number,
+            required: true
+        },
+        location: {
             type: Object,
             required: true
         }
-
-
     }
 }
 </script>

@@ -16,12 +16,12 @@
 
 <script>
 import Container from '../components/shared/Container.vue';
-// import apartments from '../components/apartments/apartments';
+import apartments from '../components/apartments/apartments';
 import ApartmentsMainInfo from '../components/apartments/ApartmentsMainInfo.vue';
 import ApartmentOwner from '../components/apartments/ApartmentOwner.vue';
 import Reviews from '../components/reviews';
 import reviewsList from '../components/reviews/reviews.json';
-import { getApartmentById } from '@/services/apartments.service';
+// import { getApartmentById } from '@/services/apartments.service';
 import SectionWithHeaderSpacer from '@/components/shared/SectionWithHeaderSpacer.vue';
 
 
@@ -34,28 +34,28 @@ export default {
         Reviews,
         SectionWithHeaderSpacer
     },
-    data() {
-        return {
-            apartment: null
-        }
-    },
+    // data() {
+    //     return {
+    //         apartment: null
+    //     }
+    // },
     computed: {
         reviewsList() {
             return reviewsList
         },
-        // apartment() {
-        //     return apartments.find(apartment => apartment.id === this.$route.params.id)
-        // }
-    },
-    async created() {
-        try {
-            const id = this.$route.params
-            const { data } = await getApartmentById(id)
-            this.apartment = data
-        } catch (error) {
-            console.error(error)
+        apartment() {
+            return apartments.find(apartment => apartment.id === this.$route.params.id)
         }
-    }
+    },
+    // async created() {
+    //     try {
+    //         const id = this.$route.params
+    //         const { data } = await getApartmentById(id)
+    //         this.apartment = data
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
 }
 </script>
 

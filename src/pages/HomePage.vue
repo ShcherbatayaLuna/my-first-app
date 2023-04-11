@@ -21,10 +21,10 @@
 <script>
 import ApartmentsList from '../components/apartments/ApartmentsList.vue';
 import ApartmentsItem from '../components/apartments/ApartmentsItem.vue';
-// import apartments from '../components/apartments/apartments';
+import apartments from '../components/apartments/apartments';
 import ApartmentFilterForm from '../components/apartments/ApartmentFilterForm.vue';
 import Container from '../components/shared/Container.vue';
-import { getApartmentsList } from '@/services/apartments.service';
+// import { getApartmentsList } from '@/services/apartments.service';
 import SectionWithHeaderSpacer from '@/components/shared/SectionWithHeaderSpacer.vue';
 
 export default {
@@ -38,7 +38,7 @@ export default {
     },
     data() {
         return {
-            apartments: '',
+            // apartments: '',
             text: '',
             filters: {
                 city: '',
@@ -48,18 +48,17 @@ export default {
     },
     computed: {
         filteredApartments() {
-            return this.filterByCityName(this.filterByPrice(this.apartments))
+            return this.filterByCityName(this.filterByPrice(apartments))
         }
     },
-    async created() {
-        try {
-            const { data } = await getApartmentsList();
-            // console.log(data)
-            this.apartments = data;
-        } catch (error) {
-            console.error(error)
-        }
-    },
+    // async created() {
+    //     try {
+    //         const { data } = await getApartmentsList();
+    //         this.apartments = data;
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // },
     methods: {
         filter({ city, price }) {
             this.filters.city = city,
