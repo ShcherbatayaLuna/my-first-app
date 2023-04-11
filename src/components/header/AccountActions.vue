@@ -15,7 +15,7 @@
                 <router-link class="account-actions__link" :to="{ name: 'my-orders' }">Мои заказы</router-link>
             </li>
             <li class="account-actions__item">
-                <button @click="logout" class="account-actions__logout">Выйти</button>
+                <button @click="handleLogout" class="account-actions__logout">Выйти</button>
             </li>
         </ul>
     </div>
@@ -42,6 +42,17 @@ export default {
         toggle() {
             this.isOpen = !this.isOpen;
         },
+        async handleLogout() {
+            try {
+                await this.logout()
+            } catch (error) {
+                this.$notify({
+                    type: 'error',
+                    title: 'Логаут не удался',
+                    text: error.message
+                })
+            }
+        }
     }
 }
 </script>
