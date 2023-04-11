@@ -1,9 +1,9 @@
 <template>
     <form class="form" @submit.prevent="handleSubmit">
         <div class="form__box">
-            <CustomSelect :items="cities" v-model="city" class="form__select"></CustomSelect>
-            <CustomInput type="number" v-model="price" placeholder="Цена, от" class="form__input"
-                error-message="Не должно быть пустым" :rules='rules'></CustomInput>
+            <CustomSelect :items="cities" v-model="city" class="form__select" />
+            <CustomInput type="number" v-model="price" placeholder="Цена, от" error-message="Не должно быть пустым"
+                :rules='rules' />
         </div>
         <Button class="form__submit" type="submit">Подбор жилья</Button>
     </form>

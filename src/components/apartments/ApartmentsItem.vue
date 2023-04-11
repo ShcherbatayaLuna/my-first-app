@@ -1,18 +1,16 @@
 <template>
     <div class="apartments-item">
         <div class="apartments-item__inner">
-            <img :src="imgSrc" alt="" class="apartments-item__photo">
+            <img :src="imgSrc" alt="Фото апартаментов" class="apartments-item__photo">
             <div class="apartments-item__content">
-                <p class="apartments-item__description">{{ decsr }}</p>
+                <p class="apartments-item__description">{{ descr }}</p>
                 <div class="apartments-item__rating">
                     <StarRating :rating="rating" />
                 </div>
                 <div class="apartments-item__price">UAH {{ price }}</div>
-                <router-link class="apartments-item__link"
-                    :to="{ name: 'apartment', params: { id }, query: { name: 'John' } }">Click
-                    me</router-link>
+                <router-link :to="{ name: 'apartment', params: { id }, query: { name: 'John' } }"
+                    class="apartments-item__link"></router-link>
             </div>
-
         </div>
     </div>
 </template>
@@ -30,7 +28,7 @@ export default {
             type: String,
             required: true
         },
-        decsr: {
+        descr: {
             type: String,
             default: ''
         },
@@ -47,16 +45,6 @@ export default {
             default: ''
         }
     },
-    methods: {
-        log(index, event) {
-            console.log(index)
-            console.log(event)
-        },
-        handleLinkClick() {
-            console.log('facebook', 'click')
-        }
-    }
-
 }
 </script>
 
