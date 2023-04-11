@@ -45,6 +45,11 @@ export default {
         async handleLogout() {
             try {
                 await this.logout()
+                const { requiresAuth } = this.$route.meta;
+                
+                if (requiresAuth) {
+                    this.$router.push({ name: 'login-page' });
+                }
             } catch (error) {
                 this.$notify({
                     type: 'error',
